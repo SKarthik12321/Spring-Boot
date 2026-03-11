@@ -10,4 +10,10 @@ public class HelloController {
     public String hello() {
         return "Hello from BridgeLabz";
     }
+
+    // UC2
+    @GetMapping("/hello/query")
+    public String helloQuery(@RequestParam String name) {
+        return "Hello " + name + " from BridgeLabz";
+    }
 }
