@@ -15,6 +15,7 @@ public class SimpleHttpServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(9000), 0);
 
         server.createContext("/", new RootHandler());
+        server.createContext("/headers", new HeaderHandler());
 
         server.setExecutor(null);
         server.start();
@@ -32,6 +33,26 @@ public class SimpleHttpServer {
 
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
+            os.close();
+        }
+    }
+    static class HeaderHandler implements HttpHandler {
+
+        public void handle(HttpExchange exchange) throws IOException {
+
+            StringBuilder response = new StringBuilder();
+
+            for (String key : exchange.getRequestHeaders().keySet()) {
+                response.append(key)
+                        .append(" : ")
+                        .append(exchange.getRequestHeaders().get(key))
+                        .append("\n");
+            }
+
+            exchange.sendResponseHeaders(200, response.length());
+
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.toString().getBytes());
             os.close();
         }
     }
