@@ -4,6 +4,8 @@ import greetingapp.model.Greeting;
 import greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GreetingService {
 
@@ -14,21 +16,30 @@ public class GreetingService {
     }
 
     public Greeting saveGreeting(String message) {
-        Greeting greeting = new Greeting(message);
-        return greetingRepository.save(greeting);
+        Greeting g = new Greeting();
+        g.setMessage(message);
+        return greetingRepository.save(g);
     }
 
-    public String getGreeting(String firstName, String lastName) {
+    public Greeting getGreetingById(Long id) {
+        return greetingRepository.findById(id).orElse(null);
+    }
 
-        if (firstName != null && lastName != null)
-            return "Hello " + firstName + " " + lastName;
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
+    }
 
-        if (firstName != null)
-            return "Hello " + firstName;
+    public Greeting updateGreeting(Long id, String message) {
+        Greeting g = greetingRepository.findById(id).orElse(null);
+        if (g != null) {
+            g.setMessage(message);
+            return greetingRepository.save(g);
+        }
+        return null;
+    }
 
-        if (lastName != null)
-            return "Hello " + lastName;
-
-        return "Hello World";
+    public String deleteGreeting(Long id) {
+        greetingRepository.deleteById(id);
+        return "Deleted";
     }
 }
