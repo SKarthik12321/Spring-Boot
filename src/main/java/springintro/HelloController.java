@@ -27,4 +27,10 @@ public class HelloController {
     public String helloPost(@RequestBody String name) {
         return "Hello " + name + " from BridgeLabz";
     }
+
+    // UC5
+    @PutMapping("/hello/put/{name}")
+    public String helloPut(@PathVariable String name, @RequestParam String lastName) {
+        return "Hello " + name + " " + lastName + " from BridgeLabz";
+    }
 }
