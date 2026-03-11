@@ -21,4 +21,10 @@ public class HelloController {
     public String helloParam(@PathVariable String name) {
         return "Hello " + name + " from BridgeLabz";
     }
+
+    // UC4
+    @PostMapping("/hello/post")
+    public String helloPost(@RequestBody String name) {
+        return "Hello " + name + " from BridgeLabz";
+    }
 }
