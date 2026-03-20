@@ -25,7 +25,8 @@ public class HomeService {
     }
 
     public Employee getById(Long id) {
-        return repo.findById(id).orElse(null);
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
     public Employee saveFromDTO(EmployeeDTO dto) {
