@@ -4,7 +4,7 @@ import com.example.springframework.dto.EmployeeDTO;
 import com.example.springframework.model.Employee;
 import com.example.springframework.service.HomeService;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,12 +33,12 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public Employee create(@RequestBody EmployeeDTO dto) {
+    public Employee create(@Valid @RequestBody EmployeeDTO dto) {
         return service.saveFromDTO(dto);
     }
 
     @PutMapping("/update/{id}")
-    public Employee update(@PathVariable Long id, @RequestBody EmployeeDTO dto) {
+    public Employee update(@PathVariable Long id, @Valid @RequestBody EmployeeDTO dto) {
         return service.updateFromDTO(id, dto);
     }
 
