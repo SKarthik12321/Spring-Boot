@@ -1,5 +1,6 @@
 package com.example.springframework.controller;
 
+import com.example.springframework.dto.EmployeeDTO;
 import com.example.springframework.model.Employee;
 import com.example.springframework.service.HomeService;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +33,13 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public Employee create(@RequestBody Employee emp) {
-        return service.save(emp);
+    public Employee create(@RequestBody EmployeeDTO dto) {
+        return service.saveFromDTO(dto);
     }
 
-    @PutMapping("/update")
-    public Employee update(@RequestBody Employee emp) {
-        return service.save(emp);
+    @PutMapping("/update/{id}")
+    public Employee update(@PathVariable Long id, @RequestBody EmployeeDTO dto) {
+        return service.updateFromDTO(id, dto);
     }
 
     @DeleteMapping("/delete/{id}")
