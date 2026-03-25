@@ -34,9 +34,16 @@ public class EmployeePayrollController {
         return repo.save(emp);
     }
 
-    @PutMapping("/update")
-    public Employee update(@RequestBody Employee emp) {
-        return repo.save(emp);
+
+    @PutMapping("/update/{id}")
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee emp) {
+        Employee existing = repo.findById(id).orElse(null);
+        if (existing != null) {
+            existing.setName(emp.getName());
+            existing.setSalary(emp.getSalary());
+            return repo.save(existing);
+        }
+        return null;
     }
 
     @DeleteMapping("/delete/{id}")
