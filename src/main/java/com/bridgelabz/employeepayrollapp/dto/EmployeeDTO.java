@@ -8,21 +8,15 @@ public class EmployeeDTO {
     @NotBlank(message = "Name cannot be empty")
     private String name;
 
-    @Min(value = 1, message = "Salary must be positive")
+    @Min(value = 1, message = "Salary must be greater than 0")
     private double salary;
 
     @NotNull(message = "Start date cannot be null")
     private LocalDate startDate;
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public double getSalary() {
-        return salary;
-    }
+    public double getSalary() { return salary; }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+    public LocalDate getStartDate() { return startDate; }
 }

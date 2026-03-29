@@ -23,31 +23,17 @@ public class Employee {
         this.startDate = startDate;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public double getSalary() {
-        return salary;
-    }
+    public double getSalary() { return salary; }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+    public LocalDate getStartDate() { return startDate; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+    public void setSalary(double salary) { this.salary = salary; }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 }
