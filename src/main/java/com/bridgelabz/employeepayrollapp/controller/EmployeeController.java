@@ -1,9 +1,9 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
-import com.bridgelabz.employeepayrollapp.dto.ResponseDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,39 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employeepayrollservice")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
 
     @GetMapping
-    public ResponseDTO getAll() {
-        List<Employee> list = service.getAll();
-        return new ResponseDTO("Get Call Success", list);
+    public List<Employee> getAll() {
+        return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseDTO getById(@PathVariable int id) {
-        Employee emp = service.getById(id);
-        return new ResponseDTO("Get By Id Success", emp);
+    public Employee getById(@PathVariable int id) {
+        return service.getById(id);
     }
 
     @PostMapping
-    public ResponseDTO create(@Valid @RequestBody EmployeeDTO dto) {
-        Employee emp = service.create(dto);
-        return new ResponseDTO("Created Successfully", emp);
+    public Employee create(@Valid @RequestBody EmployeeDTO dto) {
+        return service.create(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseDTO update(@PathVariable int id, @Valid @RequestBody EmployeeDTO dto) {
-        Employee emp = service.update(id, dto);
-        return new ResponseDTO("Updated Successfully", emp);
+    public Employee update(@PathVariable int id, @Valid @RequestBody EmployeeDTO dto) {
+        return service.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseDTO delete(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
         service.delete(id);
-        return new ResponseDTO("Deleted Successfully", null);
+        return "Deleted";
     }
 }

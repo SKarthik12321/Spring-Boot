@@ -19,27 +19,26 @@ public class EmployeeService {
     }
 
     public Employee getById(int id) {
-        return repository.findById((long) id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     public Employee create(EmployeeDTO dto) {
-        Employee emp = new Employee();
-        emp.setName(dto.getName());
-        emp.setSalary(dto.getSalary());
+        Employee emp = new Employee(dto.getName(), dto.getSalary(), dto.getStartDate());
         return repository.save(emp);
     }
 
     public Employee update(int id, EmployeeDTO dto) {
-        Employee emp = repository.findById((long) id).orElse(null);
+        Employee emp = repository.findById(id).orElse(null);
         if (emp != null) {
             emp.setName(dto.getName());
             emp.setSalary(dto.getSalary());
+            emp.setStartDate(dto.getStartDate());
             return repository.save(emp);
         }
         return null;
     }
 
     public void delete(int id) {
-        repository.deleteById((long) id);
+        repository.deleteById(id);
     }
 }
