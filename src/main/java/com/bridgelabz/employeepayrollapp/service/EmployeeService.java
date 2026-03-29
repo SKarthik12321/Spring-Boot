@@ -19,7 +19,7 @@ public class EmployeeService {
     }
 
     public Employee getById(int id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById((long) id).orElse(null);
     }
 
     public Employee create(EmployeeDTO dto) {
@@ -30,7 +30,7 @@ public class EmployeeService {
     }
 
     public Employee update(int id, EmployeeDTO dto) {
-        Employee emp = getById(id);
+        Employee emp = repository.findById((long) id).orElse(null);
         if (emp != null) {
             emp.setName(dto.getName());
             emp.setSalary(dto.getSalary());
@@ -40,6 +40,6 @@ public class EmployeeService {
     }
 
     public void delete(int id) {
-        repository.deleteById(id);
+        repository.deleteById((long) id);
     }
 }
