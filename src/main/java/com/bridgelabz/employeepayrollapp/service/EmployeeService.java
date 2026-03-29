@@ -2,33 +2,31 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.model.Employee;
+import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EmployeeService {
 
-    private List<Employee> employeeList = new ArrayList<>();
-    private int idCounter = 1;
+    @Autowired
+    private EmployeeRepository repository;
 
     public List<Employee> getAll() {
-        return employeeList;
+        return repository.findAll();
     }
 
     public Employee getById(int id) {
-        return employeeList.stream()
-                .filter(emp -> emp.getId() == id)
-                .findFirst()
-                .orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     public Employee create(EmployeeDTO dto) {
-        Employee emp = new Employee(dto.getName(), dto.getSalary());
-        emp.setId(idCounter++);
-        employeeList.add(emp);
-        return emp;
+        Employee emp = new Employee();
+        emp.setName(dto.getName());
+        emp.setSalary(dto.getSalary());
+        return repository.save(emp);
     }
 
     public Employee update(int id, EmployeeDTO dto) {
@@ -36,11 +34,12 @@ public class EmployeeService {
         if (emp != null) {
             emp.setName(dto.getName());
             emp.setSalary(dto.getSalary());
+            return repository.save(emp);
         }
-        return emp;
+        return null;
     }
 
     public void delete(int id) {
-        employeeList.removeIf(emp -> emp.getId() == id);
+        repository.deleteById(id);
     }
 }

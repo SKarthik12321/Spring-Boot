@@ -1,9 +1,9 @@
 package com.bridgelabz.employeepayrollapp.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Employee {
@@ -11,13 +11,13 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
     private double salary;
 
     public Employee() {}
 
-    public Employee(String name, double salary) {
+    public Employee(int id, String name, double salary) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
     }
